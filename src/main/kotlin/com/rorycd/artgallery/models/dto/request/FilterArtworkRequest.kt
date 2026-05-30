@@ -1,6 +1,5 @@
 package com.rorycd.artgallery.models.dto.request
 
-import com.rorycd.artgallery.models.Artwork
 import com.rorycd.artgallery.models.ArtworkStatus
 import com.rorycd.artgallery.models.Orientation
 import com.rorycd.artgallery.models.Region

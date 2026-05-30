@@ -8,7 +8,6 @@ import com.rorycd.artgallery.models.dto.request.UpdateArtistRequest
 import com.rorycd.artgallery.models.dto.response.ArtistResponse
 import com.rorycd.artgallery.models.dto.response.toResponse
 import com.rorycd.artgallery.persistence.ArtistRepository
-import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import java.time.Instant
 
@@ -23,7 +22,7 @@ class ArtistServiceImpl(
     override fun getArtist(id: String): ArtistResponse {
         // Check valid id format
         if (!artistRepo.isValidId(id)) {
-            throw ValidationException("Invalid artwork ID format")
+            throw ValidationException("Invalid artist ID format")
         }
         // Get artist
         val artist = artistRepo.getByIdOrNull(id)
@@ -61,7 +60,7 @@ class ArtistServiceImpl(
 
         // Get original artist
         val original = artistRepo.getByIdOrNull(id)
-            ?: throw ResourceNotFoundException("Artwork with ID $id not found")
+            ?: throw ResourceNotFoundException("Artist with ID $id not found")
 
         val updated = original.copy(
             firstName = request.firstName ?: original.firstName,
