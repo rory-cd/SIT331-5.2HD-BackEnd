@@ -1,6 +1,6 @@
 package com.rorycd.artgallery.exceptions
 
-import com.rorycd.artgallery.models.response.ErrorResponse
+import com.rorycd.artgallery.models.dto.response.ErrorResponse
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ExceptionHandler

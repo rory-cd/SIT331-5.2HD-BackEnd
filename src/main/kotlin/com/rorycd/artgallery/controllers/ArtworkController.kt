@@ -1,9 +1,9 @@
 package com.rorycd.artgallery.controllers
 
-import com.rorycd.artgallery.models.dto.CreateArtworkRequest
-import com.rorycd.artgallery.models.dto.FilterArtworkRequest
-import com.rorycd.artgallery.models.dto.UpdateArtworkRequest
-import com.rorycd.artgallery.models.response.ArtworkResponse
+import com.rorycd.artgallery.models.dto.request.CreateArtworkRequest
+import com.rorycd.artgallery.models.dto.request.FilterArtworkRequest
+import com.rorycd.artgallery.models.dto.request.UpdateArtworkRequest
+import com.rorycd.artgallery.models.dto.response.ArtworkResponse
 import com.rorycd.artgallery.service.ArtworkService
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -12,7 +12,7 @@ import java.net.URI
 
 
 @RestController
-@RequestMapping("/v1/artworks")
+@RequestMapping("/artworks")
 class ArtworkController(
     private val artworkService: ArtworkService
 ) {

@@ -1,17 +1,17 @@
 package com.rorycd.artgallery.models
 
 import org.springframework.data.annotation.Id
+import org.springframework.data.mongodb.core.index.Indexed
 import org.springframework.data.mongodb.core.mapping.Document
 import java.time.Instant
 
-@Document(collection = "artwork")
+@Document(collection = "artworks")
 data class Artwork (
-    @Id
-    val id: String? = null,
+    @Id val id: String? = null,
     val title: String,
-    val artistId: String,
+    @Indexed val artistId: String,
     val description: String,
-    val exhibitionId: String?,
+    @Indexed val exhibitionId: String?,
     val imageUrl: String,
     val thumbnailUrl: String,
     val isFramed: Boolean?,

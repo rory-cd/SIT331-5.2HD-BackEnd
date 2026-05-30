@@ -1,4 +1,4 @@
-package com.rorycd.artgallery.models.response
+package com.rorycd.artgallery.models.dto.response
 
 import java.time.Instant
 

@@ -1,4 +1,4 @@
-package com.rorycd.artgallery.models.response
+package com.rorycd.artgallery.models.dto.response
 
 import com.rorycd.artgallery.models.Artwork
 import com.rorycd.artgallery.models.ArtworkStatus

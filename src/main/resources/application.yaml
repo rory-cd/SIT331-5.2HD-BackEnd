@@ -3,6 +3,7 @@ spring:
     name: artgallery
   mongodb:
     uri: mongodb://localhost:27017/artgallery
+    auto-index-creation: true
   server:
     servlet:
       context-path: /api

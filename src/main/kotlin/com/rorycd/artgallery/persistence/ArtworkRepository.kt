@@ -1,13 +1,14 @@
 package com.rorycd.artgallery.persistence
 
 import com.rorycd.artgallery.models.Artwork
-import org.bson.types.ObjectId
-import org.springframework.data.mongodb.repository.MongoRepository
-import org.springframework.stereotype.Repository
+import com.rorycd.artgallery.models.dto.ArtworkFilter
 
-@Repository
-interface ArtworkRepository : MongoRepository<Artwork, String> {
-    // Custom queries here
+interface ArtworkRepository {
+    fun isValidId(id: String): Boolean
+    fun getAll(): List<Artwork>
+    fun find(filter: ArtworkFilter): List<Artwork>
+    fun getByIdOrNull(id: String): Artwork?
+    fun existsById(id: String): Boolean
+    fun deleteById(id: String)
+    fun add(artwork: Artwork): Artwork
 }
-
-fun ArtworkRepository.isValidId(id: String): Boolean = ObjectId.isValid(id)
