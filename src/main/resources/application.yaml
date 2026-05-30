@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: artgallery
+  mongodb:
+    uri: mongodb://localhost:27017/artgallery
+  server:
+    servlet:
+      context-path: /api
+#  web:
+#    error:
+#      include-message: always
