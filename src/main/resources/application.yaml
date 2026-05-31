@@ -7,6 +7,3 @@ spring:
   server:
     servlet:
       context-path: /api
-#  web:
-#    error:
-#      include-message: always

@@ -20,7 +20,7 @@ class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(BadRequestException::class)
-    fun handleBadRequest(ex: ResourceNotFoundException): ResponseEntity<ErrorResponse> {
+    fun handleBadRequest(ex: BadRequestException): ResponseEntity<ErrorResponse> {
 
         val error = ErrorResponse(
             ex.message ?: "Bad request",

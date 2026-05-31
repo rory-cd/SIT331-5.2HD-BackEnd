@@ -1,5 +1,6 @@
 package com.rorycd.artgallery.models
 
+import io.swagger.v3.oas.annotations.media.Schema
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.index.Indexed
 import org.springframework.data.mongodb.core.mapping.Document
@@ -37,8 +38,11 @@ data class Artwork (
 }
 
 data class Dimensions(
+    @Schema(description = "Width", example = "100")
     val width: Int,
+    @Schema(description = "Height", example = "60")
     val height: Int,
+    @Schema(description = "Unit", example = "cm")
     val unit: String
 )
 

@@ -11,6 +11,7 @@ import com.rorycd.artgallery.models.dto.response.ArtworkResponse
 import com.rorycd.artgallery.models.dto.response.toResponse
 import com.rorycd.artgallery.persistence.ArtistRepository
 import com.rorycd.artgallery.persistence.ArtworkRepository
+import com.rorycd.artgallery.persistence.ExhibitionRepository
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Sort
 import org.springframework.data.mongodb.core.MongoTemplate
@@ -23,7 +24,8 @@ import java.time.Instant
 @Service
 class ArtworkServiceImpl(
     private val artworkRepo: ArtworkRepository,
-    private val artistRepo: ArtistRepository
+    private val artistRepo: ArtistRepository,
+    private val exhibitionRepo: ExhibitionRepository
 ) : ArtworkService {
 
     override fun getArtworks(request: FilterArtworkRequest): List<ArtworkResponse> {
@@ -46,8 +48,14 @@ class ArtworkServiceImpl(
     override fun createArtwork(request: CreateArtworkRequest): ArtworkResponse {
         // Check the specified artist exists
         val artistExists = artistRepo.existsById(request.artistId)
-        if (!artistExists) {
+        if (!artistExists)
             throw ResourceNotFoundException("Artist with ID ${request.artistId} does not exist")
+
+        // Check any specified exhibition exists
+        if (request.exhibitionId != null) {
+            val exhibitionExists = exhibitionRepo.existsById(request.exhibitionId)
+            if (!exhibitionExists)
+                throw ResourceNotFoundException("Exhibition with ID ${request.exhibitionId} does not exist")
         }
 
         val artwork = Artwork(
