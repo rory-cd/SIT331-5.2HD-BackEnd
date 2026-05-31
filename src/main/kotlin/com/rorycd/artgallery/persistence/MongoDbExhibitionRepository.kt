@@ -19,6 +19,9 @@ class MongoDbExhibitionRepository(
     override fun getAll(): List<Exhibition> =
         mongoRepo.findAll()
 
+    override fun getAllByIds(ids: List<String>): List<Exhibition> =
+        mongoRepo.findAllById(ids)
+
     override fun getByIdOrNull(id: String): Exhibition? =
         mongoRepo.findByIdOrNull(id)
 

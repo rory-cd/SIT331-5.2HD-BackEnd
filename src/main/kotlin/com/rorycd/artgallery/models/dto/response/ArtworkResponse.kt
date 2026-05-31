@@ -11,8 +11,10 @@ data class ArtworkResponse (
     val id: String?,
     val title: String,
     val artistId: String,
+    val artistName: String,
     val description: String,
     val exhibitionId: String?,
+    val exhibitionName: String?,
     val imageUrl: String,
     val thumbnailUrl: String,
     val isFramed: Boolean?,
@@ -27,13 +29,15 @@ data class ArtworkResponse (
     val modifiedAt: Instant
 )
 
-fun Artwork.toResponse(): ArtworkResponse {
+fun Artwork.toResponse(artistName: String, exhibitionName: String?): ArtworkResponse {
     return ArtworkResponse(
         id = id,
         title = title,
         artistId = artistId,
+        artistName = artistName,
         description = description,
         exhibitionId = exhibitionId,
+        exhibitionName = exhibitionName,
         imageUrl = imageUrl,
         thumbnailUrl = thumbnailUrl,
         isFramed = isFramed,

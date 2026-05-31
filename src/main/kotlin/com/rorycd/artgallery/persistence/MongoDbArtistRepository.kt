@@ -19,6 +19,9 @@ class MongoDbArtistRepository(
     override fun getAll(): List<Artist> =
         mongoRepo.findAll()
 
+    override fun getAllByIds(ids: List<String>): List<Artist> =
+        mongoRepo.findAllById(ids)
+
     override fun getByIdOrNull(id: String): Artist? =
         mongoRepo.findByIdOrNull(id)
 

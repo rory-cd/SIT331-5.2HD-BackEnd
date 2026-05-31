@@ -30,7 +30,21 @@ class ArtworkServiceImpl(
 
     override fun getArtworks(request: FilterArtworkRequest): List<ArtworkResponse> {
         val artworks = artworkRepo.find(request.toDomainFilter())
-        return artworks.map { it.toResponse() }
+
+        // Get relevant artists
+        val artistIds = artworks.map { it.artistId }.distinct()
+        val artists = artistRepo.getAllByIds(artistIds).associateBy { it.id }
+
+        // Get relevant exhibitions
+        val exhibitionIds = artworks.map { it.artistId }.distinct()
+        val exhibitions = exhibitionRepo.getAllByIds(exhibitionIds).associateBy { it.id }
+
+        return artworks.map { artwork ->
+            val artist = artists[artwork.artistId]
+            val fullName = artist?.firstName + " " + artist?.lastName
+            val exhibition = exhibitions[artwork.exhibitionId]
+            artwork.toResponse(fullName, exhibition?.title)
+        }
     }
 
     override fun getArtwork(id: String): ArtworkResponse {
@@ -42,7 +56,15 @@ class ArtworkServiceImpl(
         val artwork = artworkRepo.getByIdOrNull(id)
             ?: throw ResourceNotFoundException("Artwork with ID $id not found")
 
-        return artwork.toResponse()
+        // Get artist and exhibition
+        val artist = artistRepo.getByIdOrNull(artwork.artistId)
+        val fullName = artist?.firstName + " " + artist?.lastName
+        val exhibition =
+            if (artwork.exhibitionId != null)
+                exhibitionRepo.getByIdOrNull(artwork.exhibitionId)
+            else null
+
+        return artwork.toResponse(fullName, exhibition?.title)
     }
 
     override fun createArtwork(request: CreateArtworkRequest): ArtworkResponse {
@@ -74,8 +96,16 @@ class ArtworkServiceImpl(
             price = request.price
         )
 
+        // Get artist and exhibition
+        val artist = artistRepo.getByIdOrNull(artwork.artistId)
+        val fullName = artist?.firstName + " " + artist?.lastName
+        val exhibition =
+            if (artwork.exhibitionId != null)
+                exhibitionRepo.getByIdOrNull(artwork.exhibitionId)
+            else null
+
         val saved = artworkRepo.add(artwork)
-        return saved.toResponse()
+        return saved.toResponse(fullName, exhibition?.title)
     }
 
     override fun updateArtwork(id: String, request: UpdateArtworkRequest) {
