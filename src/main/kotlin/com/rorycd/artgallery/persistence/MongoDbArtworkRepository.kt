@@ -1,7 +1,7 @@
 package com.rorycd.artgallery.persistence
 
 import com.rorycd.artgallery.models.Artwork
-import com.rorycd.artgallery.models.dto.ArtworkFilter
+import com.rorycd.artgallery.models.ArtworkFilter
 import org.bson.types.ObjectId
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Sort

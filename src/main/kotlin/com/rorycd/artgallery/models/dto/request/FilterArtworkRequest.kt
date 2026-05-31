@@ -3,7 +3,7 @@ package com.rorycd.artgallery.models.dto.request
 import com.rorycd.artgallery.models.ArtworkStatus
 import com.rorycd.artgallery.models.Orientation
 import com.rorycd.artgallery.models.Region
-import com.rorycd.artgallery.models.dto.ArtworkFilter
+import com.rorycd.artgallery.models.ArtworkFilter
 import io.swagger.v3.oas.annotations.media.Schema
 
 data class FilterArtworkRequest (

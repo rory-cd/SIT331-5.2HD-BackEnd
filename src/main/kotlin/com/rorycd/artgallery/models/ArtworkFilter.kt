@@ -1,8 +1,4 @@
-package com.rorycd.artgallery.models.dto
-
-import com.rorycd.artgallery.models.ArtworkStatus
-import com.rorycd.artgallery.models.Orientation
-import com.rorycd.artgallery.models.Region
+package com.rorycd.artgallery.models
 
 data class ArtworkFilter (
     val title: String?,
