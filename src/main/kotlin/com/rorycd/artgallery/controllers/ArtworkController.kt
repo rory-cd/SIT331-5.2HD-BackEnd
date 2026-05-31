@@ -82,7 +82,7 @@ class ArtworkController(
         return ResponseEntity.created(location).body(artworkResponse)
     }
 
-    @PatchMapping("/{id}")
+    @PutMapping("/{id}")
     @Operation(
         summary = "Update artwork",
         description = "Updates the artwork with the specified ID."
