@@ -11,7 +11,7 @@ data class Artwork (
     @Id val id: String? = null,
     val title: String,
     @Indexed val artistId: String,
-    val description: String,
+    val description: String?,
     @Indexed val exhibitionId: String?,
     val imageUrl: String,
     val thumbnailUrl: String,

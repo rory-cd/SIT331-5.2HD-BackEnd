@@ -11,4 +11,5 @@ interface ArtworkRepository {
     fun existsById(id: String): Boolean
     fun deleteById(id: String)
     fun add(artwork: Artwork): Artwork
+    fun count(): Long
 }

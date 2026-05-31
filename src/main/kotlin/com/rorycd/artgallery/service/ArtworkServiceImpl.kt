@@ -8,17 +8,14 @@ import com.rorycd.artgallery.models.dto.request.FilterArtworkRequest
 import com.rorycd.artgallery.models.dto.request.UpdateArtworkRequest
 import com.rorycd.artgallery.models.dto.request.toDomainFilter
 import com.rorycd.artgallery.models.dto.response.ArtworkResponse
+import com.rorycd.artgallery.models.dto.response.PaginatedResponse
 import com.rorycd.artgallery.models.dto.response.toResponse
 import com.rorycd.artgallery.persistence.ArtistRepository
 import com.rorycd.artgallery.persistence.ArtworkRepository
 import com.rorycd.artgallery.persistence.ExhibitionRepository
-import org.springframework.data.domain.PageRequest
-import org.springframework.data.domain.Sort
-import org.springframework.data.mongodb.core.MongoTemplate
-import org.springframework.data.mongodb.core.query.Criteria
-import org.springframework.data.mongodb.core.query.Query
 import org.springframework.stereotype.Service
 import java.time.Instant
+import kotlin.math.ceil
 
 
 @Service
@@ -28,7 +25,7 @@ class ArtworkServiceImpl(
     private val exhibitionRepo: ExhibitionRepository
 ) : ArtworkService {
 
-    override fun getArtworks(request: FilterArtworkRequest): List<ArtworkResponse> {
+    override fun getArtworks(request: FilterArtworkRequest): PaginatedResponse<ArtworkResponse> {
         val artworks = artworkRepo.find(request.toDomainFilter())
 
         // Get relevant artists
@@ -36,15 +33,26 @@ class ArtworkServiceImpl(
         val artists = artistRepo.getAllByIds(artistIds).associateBy { it.id }
 
         // Get relevant exhibitions
-        val exhibitionIds = artworks.map { it.artistId }.distinct()
+        val exhibitionIds = artworks.mapNotNull { it.exhibitionId }.distinct()
         val exhibitions = exhibitionRepo.getAllByIds(exhibitionIds).associateBy { it.id }
 
-        return artworks.map { artwork ->
+        val artworkWithNames = artworks.map { artwork ->
             val artist = artists[artwork.artistId]
             val fullName = artist?.firstName + " " + artist?.lastName
             val exhibition = exhibitions[artwork.exhibitionId]
             artwork.toResponse(fullName, exhibition?.title)
         }
+
+        val itemTotal = artworkRepo.count()
+        val totalPages = ceil(itemTotal.toDouble() / request.pageSize).toInt()
+
+        return PaginatedResponse(
+            content = artworkWithNames,
+            currentPage = request.pageNumber,
+            totalPages = totalPages,
+            pageSize = request.pageSize,
+            totalItems = itemTotal
+        )
     }
 
     override fun getArtwork(id: String): ArtworkResponse {

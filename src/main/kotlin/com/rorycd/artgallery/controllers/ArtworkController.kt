@@ -4,6 +4,7 @@ import com.rorycd.artgallery.models.dto.request.CreateArtworkRequest
 import com.rorycd.artgallery.models.dto.request.FilterArtworkRequest
 import com.rorycd.artgallery.models.dto.request.UpdateArtworkRequest
 import com.rorycd.artgallery.models.dto.response.ArtworkResponse
+import com.rorycd.artgallery.models.dto.response.PaginatedResponse
 import com.rorycd.artgallery.service.ArtworkService
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.Parameter
@@ -22,6 +23,7 @@ import java.net.URI
     name = "Artworks",
     description = "Endpoints for managing, filtering, and searching artworks."
 )
+@CrossOrigin(origins = ["http://localhost:3000"])
 @RestController
 @RequestMapping("/artworks")
 class ArtworkController(
@@ -38,7 +40,7 @@ class ArtworkController(
     ])
     fun getArtworks(
         @ParameterObject @ModelAttribute request: FilterArtworkRequest
-    ): ResponseEntity<List<ArtworkResponse>> {
+    ): ResponseEntity<PaginatedResponse<ArtworkResponse>> {
         val artworkResponses = artworkService.getArtworks(request)
         return ResponseEntity.ok(artworkResponses)
     }

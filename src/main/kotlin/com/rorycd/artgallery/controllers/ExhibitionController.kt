@@ -12,6 +12,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses
 import io.swagger.v3.oas.annotations.tags.Tag
 import io.swagger.v3.oas.annotations.parameters.RequestBody as OASRequestBody
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PatchMapping
@@ -27,6 +28,7 @@ import java.net.URI
     name = "Exhibitions",
     description = "Endpoints for performing CRUD operations on exhibitions."
 )
+@CrossOrigin(origins = ["http://localhost:3000"])
 @RestController
 @RequestMapping("/exhibitions")
 class ExhibitionController(

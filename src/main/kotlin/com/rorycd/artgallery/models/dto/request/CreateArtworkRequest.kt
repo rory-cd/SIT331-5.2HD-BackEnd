@@ -11,7 +11,7 @@ data class CreateArtworkRequest(
     @Schema(description = "ID of the artist who created the artwork (24-character hex string)", example = "6a1ac5f12cc171418fddea32")
     val artistId: String,
     @Schema(description = "Description", example = "Uluru from a new perspective.")
-    val description: String,
+    val description: String? = null,
     @Schema(description = "ID of exhibition in which artwork is featured (24-character hex string)", example = "6a1ae6e838cc29f8c1afd2da")
     val exhibitionId: String? = null,
     @Schema(description = "Url of the artwork image", example = "https://website.com/images/artwork.jpg")

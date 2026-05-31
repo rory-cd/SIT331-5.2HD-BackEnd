@@ -12,7 +12,7 @@ data class ArtworkResponse (
     val title: String,
     val artistId: String,
     val artistName: String,
-    val description: String,
+    val description: String?,
     val exhibitionId: String?,
     val exhibitionName: String?,
     val imageUrl: String,

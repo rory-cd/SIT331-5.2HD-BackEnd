@@ -69,4 +69,7 @@ class MongoDbArtworkRepository(
 
     override fun add(artwork: Artwork) =
         mongoRepo.save(artwork)
+
+    override fun count(): Long =
+        mongoRepo.count()
 }
