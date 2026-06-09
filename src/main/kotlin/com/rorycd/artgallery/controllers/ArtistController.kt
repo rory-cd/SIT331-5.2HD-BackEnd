@@ -28,7 +28,6 @@ import java.net.URI
     name = "Artists",
     description = "Endpoints for performing CRUD operations on artists."
 )
-@CrossOrigin(origins = ["http://localhost:3000"])
 @RestController
 @RequestMapping("/artists")
 class ArtistController(

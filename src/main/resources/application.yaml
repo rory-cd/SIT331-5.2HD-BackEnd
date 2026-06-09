@@ -4,6 +4,15 @@ spring:
   mongodb:
     uri: mongodb://localhost:27017/artgallery
     auto-index-creation: true
-  server:
-    servlet:
-      context-path: /api
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: https://dev-artgallery.au.auth0.com/
+
+auth0:
+  audience: https://artgallery-backend/
+
+server:
+  servlet:
+    context-path: /api
