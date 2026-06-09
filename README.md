@@ -14,6 +14,7 @@ Art gallery of Aboriginal Art of Australia
 | [Spring Boot](https://spring.io/projects/spring-boot) | Application framework |
 | [Spring Data MongoDB](https://spring.io/projects/spring-data-mongodb) | ODM / Data access |
 | [MongoDB](https://www.mongodb.com/) | NoSQL document database |
+| [Auth0](https://auth0.com/) | Authentication / Authorisation (via JWT) |
 | [SpringDoc OpenAPI](https://springdoc.org/) | API documentation (Swagger UI) |
 
 ## Architecture
